@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Babylon.js FPS Game</title>
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #renderCanvas {
+            width: 100%;
+            height: 100%;
+            touch-action: none; /* Quan trọng cho điều khiển cảm ứng/chuột */
+        }
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border: 1px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; /* Để không chặn click chuột vào canvas */
+        }
+    </style>
+    <!-- Nhúng thư viện Babylon.js -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <!-- Tùy chọn: Nhúng thư viện physics engine (ví dụ: Cannon.js) -->
+    <script src="https://cdn.babylonjs.com/cannon.js"></script>
+    <!-- Tùy chọn: Nhúng thư viện loaders nếu cần load model phức tạp -->
+    <!-- <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script> -->
+</head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <div id="crosshair">+</div> <!-- Thêm crosshair đơn giản -->
+    <script src="game.js"></script> <!-- File JavaScript của game -->
+</body>
+</html>
