@@ -3,42 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Babylon.js FPS Game</title>
+    <title>Babylon.js FPS Game (No Gun Model)</title>
     <style>
+        /* === Base Styles === */
         html, body {
             overflow: hidden;
             width: 100%;
             height: 100%;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            background-color: #222; /* Màu nền tối */
+            font-family: sans-serif; /* Font chữ mặc định */
         }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        /* === Canvas === */
         #renderCanvas {
             width: 100%;
             height: 100%;
-            touch-action: none; /* Quan trọng cho điều khiển cảm ứng/chuột */
+            display: block;
+            touch-action: none;
+            vertical-align: bottom;
         }
+
+        /* === Crosshair === */
         #crosshair {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 10px;
-            height: 10px;
-            border: 1px solid white;
-            border-radius: 50%;
+            width: 10px; /* Chiều rộng thanh ngang */
+            height: 1px; /* Độ dày thanh ngang */
+            background-color: rgba(255, 255, 255, 0.8); /* Màu trắng hơi mờ */
             transform: translate(-50%, -50%);
-            pointer-events: none; /* Để không chặn click chuột vào canvas */
+            pointer-events: none;
+            z-index: 10; /* Luôn trên cùng */
         }
+        #crosshair::after {
+            content: '';
+            position: absolute;
+            top: -4px; /* Điều chỉnh vị trí thanh dọc */
+            left: 50%;
+            width: 1px; /* Độ dày thanh dọc */
+            height: 10px; /* Chiều cao thanh dọc */
+            background-color: rgba(255, 255, 255, 0.8); /* Đồng bộ màu */
+            transform: translateX(-50%);
+        }
+
+        /* === Sensitivity Controls === */
+        #controls {
+            position: absolute;
+            top: 15px; /* Hơi dịch xuống */
+            left: 15px; /* Hơi dịch vào */
+            background-color: rgba(0, 0, 0, 0.65); /* Nền tối hơn chút */
+            padding: 10px 15px;
+            border-radius: 6px; /* Bo tròn hơn */
+            color: white;
+            font-size: 14px;
+            z-index: 10; /* Trên cùng */
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Thêm bóng đổ nhẹ */
+        }
+        #controls label {
+            margin-right: 8px;
+            white-space: nowrap; /* Không xuống dòng label */
+        }
+        #controls input[type="range"] {
+            vertical-align: middle;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        #sensitivityValue {
+            min-width: 35px;
+            display: inline-block;
+            text-align: right;
+            font-weight: bold;
+            font-family: monospace; /* Font số rõ ràng hơn */
+            background-color: rgba(255,255,255,0.1);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        /* === Phần CSS cho súng overlay đã được XÓA === */
+
     </style>
     <!-- Nhúng thư viện Babylon.js -->
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
-    <!-- Tùy chọn: Nhúng thư viện physics engine (ví dụ: Cannon.js) -->
+    <!-- Nhúng thư viện physics engine (Cannon.js) -->
     <script src="https://cdn.babylonjs.com/cannon.js"></script>
-    <!-- Tùy chọn: Nhúng thư viện loaders nếu cần load model phức tạp -->
-    <!-- <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script> -->
+    <!-- Nhúng thư viện loaders -->
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
 </head>
 <body>
+    <!-- Canvas để render game -->
     <canvas id="renderCanvas"></canvas>
-    <div id="crosshair">+</div> <!-- Thêm crosshair đơn giản -->
-    <script src="game.js"></script> <!-- File JavaScript của game -->
+
+    <!-- Các phần tử UI còn lại -->
+    <div id="crosshair"></div>
+    <div id="controls">
+        <label for="sensitivitySlider">Độ nhạy:</label>
+        <input type="range" id="sensitivitySlider" min="1000" max="10000" step="100" value="4000">
+        <span id="sensitivityValue">4000</span>
+    </div>
+
+    <!-- === Phần HTML cho súng overlay đã được XÓA === -->
+
+    <!-- Link đến file JavaScript của game (phiên bản đã dọn dẹp code súng 3D) -->
+    <script src="game.js"></script>
 </body>
 </html>
